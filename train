@@ -82,8 +82,8 @@ fake_B_buffer = ReplayBuffer()
 transforms_ = [ transforms.Resize(int(opt.size*1.12), Image.BICUBIC), 
                 transforms.RandomCrop(opt.size), 
                 transforms.RandomHorizontalFlip(),
-                transforms.ToTensor(),
-                transforms.Normalize((0.5,0.5,0.5), (0.5,0.5,0.5)) ]
+                transforms.ToTensor(),  # 将图片像素范围从[0, 255]转到[0, 1]
+                transforms.Normalize((0.5,0.5,0.5), (0.5,0.5,0.5)) ]  # 将像素值范围转到[-1, 1]
 dataloader = DataLoader(ImageDataset(opt.dataroot, transforms_=transforms_, unaligned=True), 
                         batch_size=opt.batchSize, shuffle=True, num_workers=opt.n_cpu)
 
